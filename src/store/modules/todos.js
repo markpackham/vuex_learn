@@ -49,14 +49,11 @@ const actions = {
       `https://jsonplaceholder.typicode.com/todos/${updTodo.id}`,
       updTodo
     );
-
-    console.log(response.data);
-
     commit("updateTodo", response.data);
   },
 };
 
-// Mutations
+// Mutations (mutates state)
 const mutations = {
   setTodos: (state, todos) => (state.todos = todos),
   newTodo: (state, todo) => state.todos.unshift(todo),
@@ -64,6 +61,7 @@ const mutations = {
     (state.todos = state.todos.filter((todo) => todo.id !== id)),
   updateTodo: (state, updTodo) => {
     const index = state.todos.findIndex((todo) => todo.id === updTodo.id);
+    // if it doesn't exisit it will give -1
     if (index !== -1) {
       state.todos.splice(index, 1, updTodo);
     }
